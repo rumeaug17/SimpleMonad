@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleMonadLibrary", "ClassLibrary1\SimpleMonadLibrary.csproj", "{F6087096-1C26-4D64-866E-90D0774ADAEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleMonadLibrayUnitTests", "UnitTestProject1\SimpleMonadLibrayUnitTests.csproj", "{375689CF-6D42-4887-AE5E-F2D8ACEC5B12}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F6087096-1C26-4D64-866E-90D0774ADAEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6087096-1C26-4D64-866E-90D0774ADAEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6087096-1C26-4D64-866E-90D0774ADAEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6087096-1C26-4D64-866E-90D0774ADAEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{375689CF-6D42-4887-AE5E-F2D8ACEC5B12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{375689CF-6D42-4887-AE5E-F2D8ACEC5B12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{375689CF-6D42-4887-AE5E-F2D8ACEC5B12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{375689CF-6D42-4887-AE5E-F2D8ACEC5B12}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F3B2B90E-284E-4AD1-9C47-62C74308CF9B}
+	EndGlobalSection
+EndGlobal
