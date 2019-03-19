@@ -1,12 +1,18 @@
 ﻿using SimpleMonad;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
 
 using Memo = System.Collections.Generic.Dictionary<ulong, ulong>;
+using static SimpleMonad.OptionExt; // for None and Some
 
 namespace UnitTestProject1
 {
+    internal static class DictionaryExt
+    {
+        public static Option<ulong> GetValueOrNone(this Memo memo, ulong key)
+            => memo.ContainsKey(key) ? Some(memo[key]) : None<ulong>();      
+    }
+
     [TestClass]
     public class FactorialTest
     {
@@ -27,17 +33,16 @@ namespace UnitTestProject1
                 return State<ulong, Memo>.Init(1);
             }
 
-            var memoed = State<ulong, Memo>.GetS(memo => memo.GetValueOrDefault(number));
+            var memoed = State<Option<ulong>, Memo>.GetS(memo => memo.GetValueOrNone(number));
             var result = memoed.Fmap(res =>
-                res == default(ulong) ?
-                    from next in FactImpl(number - 1)
-                    let r = number * next
-                    from _ in State<ulong, Memo>.Update(m => DictUpdate(m, number, r))
-                    select r
-                :
-                    State<ulong, Memo>.Init(res)
-            );
-
+               res.Match(
+                   someFunc: v => State<ulong, Memo>.Init(v),
+                   noneFunc: () =>
+                       from next in FactImpl(number - 1)
+                       let r = number * next
+                       from _ in State<ulong, Memo>.Update(m => DictUpdate(m, number, r))
+                       select r)
+           );
             return result;
         }
 

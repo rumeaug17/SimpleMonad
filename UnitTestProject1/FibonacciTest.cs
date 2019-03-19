@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 using Memo = System.Collections.Generic.Dictionary<long, long>;
+using static SimpleMonad.OptionExt; // for None and Some
 
 namespace SimpleMonad
 {
@@ -23,17 +23,16 @@ namespace SimpleMonad
                 return State<long, Memo>.Init(1);
             }
 
-            var memoed = State<long, Memo>.GetS(memo => memo.GetValueOrDefault(number));
-
+            var memoed = State<Option<long>, Memo>.GetS(memo => memo.ContainsKey(number) ? Some(memo[number]) : None<long>());
             var result = memoed.Fmap(res =>
-                res == default(long) ?
+                res.Match(
+                    someFunc: v => State<long, Memo>.Init(v),
+                    noneFunc: () =>
                     from a in FiboImpl(number - 1)
                     from b in FiboImpl(number - 2)
                     let x = a + b
                     from _ in State<long, Memo>.Update(m => DictUpdate(m, number, x))
-                    select x
-                :
-                    State<long, Memo>.Init(res)
+                    select x)      
             );
             return result;
         }
