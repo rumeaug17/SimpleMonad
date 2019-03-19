@@ -60,6 +60,12 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
+        public void CheckBigFact()
+        {
+            Assert.AreEqual(expected: (ulong)2_432_902_008_176_640_000, actual: Fact(20));
+        }
+
+        [TestMethod]
         public void CheckSumOfFirst10Fact()
         {
             // for a list gen we need a scanleft function on list or enumerable
