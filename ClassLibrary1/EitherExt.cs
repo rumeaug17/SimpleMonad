@@ -26,6 +26,6 @@ namespace SimpleMonad
            Func<TRight, Either<TLeft, TRightBind>> collectionSelector,
            Func<TRight, TRightBind, TRightOut> resultSelector)
            => first.Fmap(value => collectionSelector(value)
-                                  .Fmap(secondValue => new Either<TLeft, TRightOut>(resultSelector(value, secondValue))));
+                                  .Map(secondValue => resultSelector(value, secondValue)));
     }
 }

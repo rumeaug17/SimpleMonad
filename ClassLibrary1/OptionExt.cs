@@ -4,6 +4,10 @@ namespace SimpleMonad
 {
     public static class OptionExt
     {
+        public static Option<T> None<T>() => new Option<T>();
+
+        public static Option<T> Some<T>(T value) => value;
+
         public static Option<T> Where<T>(this Option<T> source, Func<T, bool> predicate)
             => source.HasValue && predicate(source.Value) ? source : new Option<T>();
 
@@ -18,7 +22,7 @@ namespace SimpleMonad
             Func<T, Option<B>> collectionSelector,
             Func<T, B, U> resultSelector)
             => first.Fmap(value => collectionSelector(value)
-                                   .Fmap(secondValue => new Option<U>(resultSelector(value, secondValue))));
+                                   .Map(secondValue => resultSelector(value, secondValue)));
 
         public static T FirstOrDefault<T>(this Option<T> first, T defaultValue)
             => first.Reduce(defaultValue);
